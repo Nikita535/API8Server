@@ -1,0 +1,38 @@
+syntax = "proto3";
+package com.example.grpc;
+
+message TaskRequest{
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  string date = 4;
+}
+
+
+message Done{
+  bool boolDone = 1;
+}
+
+message AllTasksResponse{
+  repeated TaskResponse cases = 1;
+}
+
+
+
+message TaskResponse{
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  string date = 4;
+}
+
+
+service GreetingService{
+  rpc addTask(TaskRequest) returns (TaskResponse) {};
+
+  rpc deleteTask(TaskRequest) returns (Done) {};
+
+  rpc allTasks(Done) returns (AllTasksResponse) { };
+
+  rpc changeTask(TaskRequest) returns (TaskResponse) {};
+}
